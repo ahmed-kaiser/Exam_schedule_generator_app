@@ -1,0 +1,181 @@
+body {
+    padding-top: 61px;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+body{
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #f8f9fa;
+}
+
+.sidebar{
+    position: fixed;
+    height: 100vh;
+    background-color: #0e3f3fcc;
+    padding: 0;
+    
+}
+
+.sidebar ul li{
+    list-style-type: none;
+}
+
+.nav-item{
+    padding-left: 7px;
+}
+.nav-item a{
+    color: white;
+}
+
+.nav-item{
+    border-bottom: 1px solid black;
+}
+
+.nav-item:last-child{
+    border-bottom: none;
+}
+
+.nav-item a:hover{
+    background-color: rgb(87, 118, 145);
+    color: black;
+}
+
+.navbar{
+    background-color: #0e3f3fcc;
+}
+
+.navbar img{
+    margin-left: 20px;
+}
+
+.btn-outline-dark {
+    color: #dfefff;
+    border-color: #182837;
+}
+
+
+.content{
+    min-height: 100vh;
+    width: 78vw;
+    float: right;
+    position: relative;
+}
+
+.content_search{
+    width: 35%; 
+    padding: 15px;
+}
+
+
+.log_form{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    width: 28%;
+    min-height: 305px;
+    border-radius: 2px;
+    color: black;
+    background-color: #eaeff588;
+}
+
+.log_header{
+    background-color: #0e3f3fcc;
+    width: 100%;
+    min-height: 55px;
+    padding: 10px;
+    color: white;
+    border-radius: 2px ;
+}
+
+.log_body{
+    padding: 15px;
+}
+
+.log_body button{
+    margin-top: 10px;
+}
+
+.course_list_head{
+    height: 50px;
+}
+
+.course_list_title{
+    display: inline-block;
+}
+
+.course_list_title h5{
+    padding: 10px;
+}
+
+.course_list_button{
+    float: right;
+}
+
+.top_button{
+    display: block;
+    position: relative;
+    height: 50px;
+}
+
+.container{
+    background-color: #fff;
+    padding: 10px;
+    min-height: 100vh;
+}
+
+.home_content{
+    margin: 0;
+    padding: 0;
+}
+
+.home_img{
+    margin-left: 25px;
+    align-items: center;
+    padding: 0;
+}
+
+.banner{
+    text-align: center;
+}
+
+.banner h4{
+    color: black;
+}
+
+.banner_button a{
+    width: 20%;
+}
+
+.home_content_header{
+    margin-top: 5px;
+    background-color: #0b4049e5;
+    height: 180px;
+    color: white;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.home_content_header_content{
+    padding: 10px;
+}
+
+.home_content_search{
+    width: 25%;
+}
+
+.blockquote-footer{
+    margin-top: 30px;
+    background-color: #0e3f3fcc;
+    height: 30px;
+}
+
+

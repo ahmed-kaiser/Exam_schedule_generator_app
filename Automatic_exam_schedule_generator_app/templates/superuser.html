@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin| Change Password{% endblock title %}
+
+{% block body %}
+<div class="eve_batch_info py-4">
+    <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Super User</h5>
+       </div>
+       <div class="course_list_button">
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#room">
+            <i class="fas fa-plus"></i> Add User
+          </button>
+        </div> 
+  </div>
+  <hr>
+  <div class="modal fade" id="room" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">New User</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="create_superuser" method="post">
+                  {% csrf_token %}
+                  <div class="modal-body">
+                    <div class="input-group my-3" style="width: 90%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">First Name</span>
+                      <input type="text" name="fname" class="form-control"
+                        placeholder="" required>
+                    </div>
+                    <div class="input-group my-3" style="width: 90%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Last Name</span>
+                      <input type="text"  name="lname" class="form-control"
+                        placeholder="" style="width: 30%;" required>
+                    </div>
+                    <div class="input-group my-3" style="width: 90%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Email</span>
+                      <input type="email"  name="email" class="form-control"
+                        placeholder="" style="width: 30%;" required>
+                    </div>
+                    <div class="input-group my-3" style="width: 90%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">User Name</span>
+                      <input type="text"  name="uname" class="form-control"
+                        placeholder="" style="width: 30%;" required>
+                    </div>
+                    <div class="input-group my-3" style="width: 90%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Password</span>
+                      <input type="password" id="pasw1"  name="pass1" class="form-control"
+                        placeholder="" style="width: 30%;" required>
+                    </div>
+                    <div class="input-group my-3" style="width: 90%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Confirm Password</span>
+                      <input type="password" id="pasw2"  name="pass2" class="form-control"
+                        placeholder="" style="width: 30%;" required>
+                      <span id = "message" style="color:red"> </span> <br><br>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                  </div>
+                </form>
+          </div>
+        </div>
+      </div>
+  <div>
+  <table class="table" style="width: 50%; margin: auto;">
+      <thead>
+        <tr style="text-align: center;">
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Username</th>
+          <th scope="col">Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in user_list %}
+        <tr style="text-align: center;">
+          <td>{{user.first_name}} {{user.last_name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.username}}</td>
+          <td>
+            <form action="/remove_user/{{user.id}}" method="post"
+              onsubmit="return confirm('Are You Sure, You Want To Remove {{user.first_name}} {{user.last_name}}  ....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-light"><i class="fas fa-user-slash"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock body %}

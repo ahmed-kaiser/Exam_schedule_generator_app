@@ -1,0 +1,97 @@
+{% extends 'eee/eee_base.html' %}
+
+{% block title %} Batch Info - Evening{% endblock title %}
+
+{% block body %}
+<div class="eve_batch_info py-4">
+  <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Batch Details (Evening)</h5>
+       </div>
+       <div class="course_list_button">
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="fas fa-plus"></i> Add New Batch Info
+          </button>
+        </div> 
+     </div>
+  <hr>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">New Record</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/eee_eve_batch_info.html" method="post">
+                  <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Batch NO.</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="batch_no" placeholder="Enter batch no." required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Section</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="section" placeholder="Enter section" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">No. Of Students</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="st_number" placeholder="Enter no. of students" required>
+                    </div>
+                    <div class="input-group mb-3">
+                       <span class="input-group-text" id="basic-addon1"  style="width: 30%;" >Trimister</span>
+                       <select class="form-select" id="inputGroupSelect01" name="trimister">
+                          {% for trimister in trimister_list %}
+                            <option value="{{trimister.trimister}}">{{trimister.trimister}}</option>
+                          {% endfor %}
+                       </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+               </form>
+          </div>
+        </div>
+      </div>
+  <div>
+    <table class="table my-5" style="width: 80%; margin: auto;">
+      <thead>
+        <tr style="text-align:center">
+          <th scope="col">Batch No.</th>
+          <th scope="col">Section</th>
+          <th scope="col">No. Of Students</th>
+          <th scope="col">Trimister</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in info_list %}
+        <tr style="text-align:center">
+          <td>{{info.batch_no}}</td>
+          <td>{{info.section}}</td>
+          <td>{{info.st_number}}</td>
+          <th>{{info.trimister.trimister}}</th>
+          <td>
+            <form action="/eee_eve_get_batch_info/{{info.batch_no}}/{{info.section}}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+            </form>
+          </td>
+          <td>
+            <form action="/eee_eve_delete_batch_info/{{info.id}}" method="post"
+              onsubmit="return confirm('Are You Sure, You Want To Delete The Record of (batch-{{info.batch_no}}-{{info.section}})....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock body %}

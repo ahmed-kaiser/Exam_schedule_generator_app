@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}/Day Exam Routine{% endblock title %}
+
+{% block body %}
+      <div class="top_button my-3">
+          <div class="course_list_title">
+             <h5>Exam Schedule (Day)</h5>
+          </div>
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="float:right">
+            <a type="submit" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#datetime">
+                 Generate
+            </a>
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="fas fa-plus-circle"></i> Add
+            </button>
+            <form action="/day_delete_routine" method="post"  onsubmit="return confirm('Are You Sure, You Want To Delete The Schedule....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </form>
+          </div>
+      </div>
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">New Schedule Record</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/day_routine.html" method="post">
+                  <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Date</span>
+                      <input type="date" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="exam_date" value="" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Time</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="exam_time" value="(7-9)PM" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Course Code</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="course_code"  value="" required >
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Course Name</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="course_name"  value="" required >
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Dept.</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="dept" value="" required>
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Batch</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="batch"  value="" required >
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Section</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="section"  value="" required >
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Room No.</span>
+                      <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="room"  value="" required >
+                    </div>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Student Number</span>
+                      <input type="number" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="st_number"  value="" required >
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+               </form>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="modal fade" id="datetime" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Give Schedule Info</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/day_generate_routine" method="post">
+                  {% csrf_token %}
+                  <div class="modal-body">
+                    <div class="input-group my-3" style="width: 80%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Exam Start Date</span>
+                      <input type="date"  name="date" class="form-control"
+                        placeholder="Enter Room Sit Capacity" style="width: 30%;" required>
+                    </div>
+                    <div class="input-group my-3" style="width: 80%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Time</span>
+                      <input type="text"  name="time" class="form-control"
+                        placeholder="Enter Room Sit Capacity" style="width: 30%;" required value="(10am-12pm)">
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Generate</button>
+                  </div>
+                </form>
+            </div>
+         </div>
+       </div>
+      <div>
+      <div class="content_table">
+      <p style="float:right">
+          <a class="btn btn-light" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <i class="fas fa-search"></i> Search
+          </a>
+      </p>
+      <div class="collapse" id="collapseExample">
+      <table class="table">
+       <tr>
+        <td >
+          <form action="/day_search_schedule.html/{{1}}" method="post">
+            {% csrf_token %}
+            <label for="basic-url" class="form-label"><b>Search by Dept and Batch</b></label>
+            <div class="input-group rounded-pill" style="margin: auto; width:70%;">
+              <input type="text" class="form-control" name="dept"  placeholder="Dept.">
+              <input type="text" class="form-control" name="batch"  placeholder="Batch">
+              <button class="btn btn-outline-success" type="submit" id="button-addon1" value="submit"><i class="fas fa-search"></i></button>
+            </div> 
+          </form>
+        </td>
+        <td>
+          <form action="/day_search_schedule.html/{{2}}" method="post">
+            {% csrf_token %}
+              <label for="basic-url" class="form-label"><b>Search by Date and Room</b></label>
+              <div class="input-group rounded-pill" style="margin: auto; width:70%;">
+                <input type="date" class="form-control" name="date"  placeholder="">
+                <input type="text" class="form-control" name="room"  placeholder="Enter room no">
+                <button class="btn btn-outline-success" type="submit" id="button-addon1" value="submit"><i class="fas fa-search"></i></button>
+              </div>
+          </form>
+        </td>
+       </tr>
+      </table> 
+      </div>
+      </div>
+      <div class="content_table py-3">
+        {% for d in date_list %}
+        <table class="table table-bordered">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Date & Time</th>
+              <th scope="col">Course Code & Title</th>
+              <th scope="col">Program & Batch</th>
+              <th scope="col">Room & Roll</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td rowspan="100">{{d.exam_date}}<br>{{d.weekday}}<br>{{d.exam_time}}</td>
+                {% for n in routine_list %}
+                {% if n.exam_date == d.exam_date %}
+                <tr>
+                <td>{{n.course_code}}-{{n.course_name}}</td>
+                <td>{{n.dept}}-{{n.batch}}-{{n.section}}-({{n.total_st}})</td>
+                <td>{{n.room}}-({{n.st_number}})</td>
+                <td>
+                  <form action="/day_get_schedule_info/{{n.id}}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+                  </form>
+                </td>
+                <td>
+                  <form action="/day_delete_schedule_info/{{n.id}}" method="post" onsubmit="return confirm('Are You Sure, You Want To Delete The Info  of {{n.dept}}-{{n.batch}}-{{n.section}}....!')">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tr>
+          </tbody> 
+        </table>
+        {% endfor %}
+     </div>
+{% endblock body %}

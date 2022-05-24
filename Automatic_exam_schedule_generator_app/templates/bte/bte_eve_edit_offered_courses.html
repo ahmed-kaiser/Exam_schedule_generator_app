@@ -1,0 +1,43 @@
+{% extends 'bte/bte_base.html' %}
+
+{% block title %} Edit Offered Course - Evening{% endblock title %}
+
+{% block body %}
+<div class="eve_offered_courses py-4">
+   <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Edit Record</h5>
+       </div>
+       <div class="course_list_button">
+          <a type="button" href="/bte_eve_offered_courses.html" class="btn btn-light" >
+            <i class="fas fa-undo"></i> Back To List
+          </a>
+        </div> 
+     </div>
+   <hr>
+  <center class="my-5">
+    {% for offered_course in offered_courses %}
+    <form action="/bte_eve_update_offered_courses/{{offered_course.id}}" method="post">
+      {% csrf_token %}
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width:30%;">Trimister</span>
+        <input type="text" class="form-control" name="trimister" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" value="{{offered_course.trimister.trimister}}">
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width:30%;">Course Code</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" name="course_code"
+          aria-describedby="inputGroup-sizing-default" value="{{offered_course.course_code}}">
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width:30%;">Course Name</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" name="course_name"
+          aria-describedby="inputGroup-sizing-default" value="{{offered_course.course_name}}">
+      </div>
+      <button class="btn btn-outline-success" style="width: 40%;" type="submit" id="button-addon1"
+        value="update">Update</button>
+    </form>
+   {% endfor %}
+  </center>
+</div>
+{% endblock body %}

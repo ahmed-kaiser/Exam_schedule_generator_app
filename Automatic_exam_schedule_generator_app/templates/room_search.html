@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Room Search Result{% endblock title %}
+{% block body %}
+<div class="course_list py-4">
+    <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Rooms Detail</h5>
+       </div>
+       <div class="course_list_button">
+          <a href="/room.html" class="btn btn-light" >
+            <i class="fas fa-undo"></i> Rooms Info
+          </a>
+        </div> 
+   </div>
+   <hr> 
+   <table class="table" style="width: 50%; margin: auto;">
+      <thead>
+        <tr style="text-align: center;">
+          <th scope="col">Room No.</th>
+          <th scope="col">Sit Capasity</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for room in room_list %}
+        <tr style="text-align: center;">
+          <td>{{room.room_no}}</td>
+          <td>{{room.room_capacity}}</td>
+          <td>
+            <form action="/room_delete/{{room.room_no}}" method="post"
+              onsubmit="return confirm('Are You Sure, You Want To Delete The Room {{room.room_no}}  ....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock body %}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/all.css' %}">
+    <link  rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>Home{% block title %} {% endblock title %}</title>
+</head>
+
+<body class="bg-light">
+<nav class="navbar navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand home_header" href="/index.html">
+      <img src="{% static 'images/logo.png' %}" height="45px">
+      Portcity International University
+    </a>
+  </div>
+</nav>
+<div class="container">
+ <div class="home_content">
+  <div class="home_content_header">
+      <center>
+        <p class="home_content_header_content">
+            <h4>Port City International University</h4>
+            <h6>{{info.trimister}} {{info.pub_date.year}} Trimester
+            {{info.term}} Term Examination<br>
+            Exam Schedule ({{info.batch}} Batch)</h6>
+            Published ({{info.pub_date}})
+        </p>
+      </center>
+  </div>
+   {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+     {% endif %}
+
+    {% block body %}
+
+    {% endblock body %}
+  </div>
+  
+</div>
+<div class="blockquote-footer">
+
+</div>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/js/all.js' %}"></script>
+</body>
+</html>

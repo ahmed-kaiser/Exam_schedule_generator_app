@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Page| Room {% endblock title %}
+
+{% block body %}
+<div class="course_list py-4">
+  <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Rooms Detail</h5>
+       </div>
+       <div class="course_list_button">
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#room">
+            <i class="fas fa-plus"></i> Add Room
+          </button>
+        </div> 
+  </div>
+  <hr>
+  <div class="modal fade" id="room" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">New Record</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="room.html" method="post">
+                  {% csrf_token %}
+                  <div class="modal-body">
+                    <div class="input-group my-3" style="width: 80%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Room No.</span>
+                      <input type="text" name="room_no" class="form-control"
+                        placeholder="Enter Room No." required>
+                    </div>
+                    <div class="input-group my-3" style="width: 80%; margin: auto;">
+                      <span class="input-group-text" id="inputGroup-sizing-default" style="width: 35%;">Room Capacity</span>
+                      <input type="text"  name="room_capacity" class="form-control"
+                        placeholder="Enter Room Sit Capacity" style="width: 30%;" required>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                </form>
+          </div>
+        </div>
+      </div>
+  <div>
+    <form action="/room_search.html" method="post" style="margin: 50px;">
+      {% csrf_token %}
+      <div class="input-group" style="width:25%; margin: auto;">
+        <input type="text" aria-label="search" name="search" class="form-control" placeholder="Enter room no."
+          style="width: 50%;" required>
+        <button class="btn btn-outline-success" type="submit" id="button-addon1" value="submit"><i
+            class="fas fa-search"></i></button>
+      </div>
+    </form>
+    <table class="table" style="width: 50%; margin: auto;">
+      <thead>
+        <tr style="text-align: center;">
+          <th scope="col">Room No.</th>
+          <th scope="col">Sit Capasity</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for room in room_list %}
+        <tr style="text-align: center;">
+          <td>{{room.room_no}}</td>
+          <td>{{room.room_capacity}}</td>
+          <td>
+            <form action="/room_delete/{{room.room_no}}" method="post"
+              onsubmit="return confirm('Are You Sure, You Want To Delete The Room {{room.room_no}}  ....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock body %}

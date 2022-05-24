@@ -1,0 +1,98 @@
+{% extends 'bte/bte_base.html' %}
+
+{% block title %}Offered Courses - Day{% endblock title %}
+
+{% block body %}
+<div class="course_list py-4">
+  <div class="">
+    <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Offered Courses (Day)</h5>
+       </div>
+       <div class="course_list_button">
+          <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="fas fa-plus"></i> Add New Course
+          </button>
+        </div> 
+     </div>
+      <hr>
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+             <form action="/bte_day_offered_courses.html" method="post">
+                {% csrf_token %}
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">New Record</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group my-3" >
+                    <span class="input-group-text" id="basic-addon1" style="width: 25%;">Course Code</span>
+                    <input type="text" aria-label="course_code" name="course_code" class="form-control"
+                      placeholder="Enter Course Code" required>
+                  </div>
+                  <div class="input-group my-3">
+                    <span class="input-group-text" id="basic-addon1" style="width: 25%;">Course Name</span>
+                    <input type="text" aria-label="course_code" name="course_name" class="form-control"
+                      placeholder="Enter Course Name" required>
+                  </div>
+                  <div class="input-group my-3">
+                    <span class="input-group-text" id="basic-addon1"  style="width: 25%;" >Trimister</span>
+                    <select class="form-select" id="inputGroupSelect01" name="trimister">
+                        {% for trimister in trimister_list %}
+                          <option value="{{trimister.trimister}}">{{trimister.trimister}}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+             </form>
+          </div>
+        </div>
+      </div>
+    <form action="/bte_day_course_search.html" method="post" style="margin: 50px;">
+      {% csrf_token %}
+      <div class="input-group" style="width: 35%; margin: auto;">
+        <input type="text" aria-label="search" name="search" class="form-control" placeholder="Search by Course code or Trimister no."
+          style="width: 50%;" required>
+        <button class="btn btn-outline-primary" type="submit" id="button-addon1" value="submit"><i
+            class="fas fa-search"></i></button>
+      </div>
+    </form>
+    <table class="table" style="width: 80%; margin: auto;">
+      <thead>
+        <tr>
+          <th scope="col">Course Code</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Trimister</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in course_list %}
+        <tr>
+          <td>{{course.course_code}}</td>
+          <td>{{course.course_name}}</td>
+          <td>{{course.trimister.trimister}}</td>
+          <td>
+            <form action="/bte_day_get_offered_courses/{{course.id}}" method="post">
+              {% csrf_token %}
+              <button type="submit" method="post" class="btn btn-outline-success" ><i class="fas fa-edit"></i></button>
+            </form>
+          </td>
+          <td>
+            <form action="/bte_day_course_delete/{{course.id}}" method="post" onsubmit="return confirm('Are You Sure, You Want To Delete The Course {{course.course_code}}  ....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock body %}

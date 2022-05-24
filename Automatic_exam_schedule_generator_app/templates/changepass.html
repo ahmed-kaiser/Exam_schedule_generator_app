@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin| Change Password{% endblock title %}
+
+{% block body %}
+<div class="eve_batch_info py-4">
+    <h5>Change Password</h5>
+    <hr>
+    <center>
+    <form action="changepass.html", method="post" style="width:35%;" class="py-5">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width:35%;">Username</span>
+                <input type="text" class="form-control" name="username" placeholder="Username" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width:35%;">New Password</span>
+                <input type="password" class="form-control" name="pass1" placeholder="**********" aria-describedby="basic-addon1" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1" style="width:35%;">Confirm Password</span>
+                <input type="password" class="form-control" name="pass2" placeholder="**********"  aria-describedby="basic-addon1" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Save</button>
+    </form>
+    </center>
+</div>
+{% endblock body %}

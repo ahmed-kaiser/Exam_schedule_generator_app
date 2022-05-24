@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}/Day Exam Schedule{% endblock title %}
+{% block body %}
+<div class="eve_batch_info py-4">
+  <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Exam Schedule Record</h5>
+       </div>
+       <div class="course_list_button">
+          <a class="btn btn-light" href="/day_routine.html">
+            <i class="fas fa-undo"></i> Schedule
+          </a>
+        </div> 
+     </div>
+  <hr>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date & Time</th>
+              <th scope="col">Course Code & Title</th>
+              <th scope="col">Program & Batch</th>
+              <th scope="col">Room & Roll</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for n in routine_list %}
+              <tr>
+                <td>{{n.exam_date}}-{{n.weekday}}<br>{{n.exam_time}}</td>
+                <td>{{n.course_code}}-{{n.course_name}}</td>
+                <td>{{n.dept}}-{{n.batch}}-{{n.section}}-({{n.total_st}})</td>
+                <td>{{n.room}}-({{n.st_number}})</td>
+                <td>
+                  <form action="/day_get_schedule_info/{{n.id}}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-success"><i class="fas fa-edit"></i></button>
+                  </form>
+                </td>
+                <td>
+                  <form action="/day_delete_schedule_info/{{n.id}}" method="post" onsubmit="return confirm('Are You Sure, You Want To Delete The Info  of {{n.dept}}-{{n.batch}}-{{n.section}}....!')">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody> 
+        </table>
+</div>
+{% endblock body %}

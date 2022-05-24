@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/all.css' %}">
+    <link  rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>Admin{% block title %} {% endblock title %}</title>
+</head>
+
+<body>
+<nav class="navbar navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/admin.html">
+      <img src="{% static 'images/logo.png' %}" height="35px">
+      Portcity International University
+    </a>
+    <form action="/logout" method="post" class="d-flex">
+      {% csrf_token %}
+      <button class="btn btn-outline-dark" type="submit"><i class="fas fa-sign-out-alt"></i> log-out</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+   <nav id="sidebarMenu" class="col-md-3 col-lg-2  d-md-block sidebar py-2">
+      <div class="position-sticky pt-3">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="admin.html"><i class="fas fa-home"></i>  Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" role="button" data-bs-toggle="collapse" href="#collapseDept" aria-expanded="false" aria-controls="collapseDept">
+            <i class="far fa-building"></i>  Departments <i class="fas fa-caret-down"></i>
+          </a>
+          <div class="collapse" id="collapseDept">
+          <ul class="flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="cse_admin.html">CSE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="eee_admin.html">EEE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cen_admin.html">CNE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="bte_admin.html">BTE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">BBA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">MBA</a>
+            </li>
+          </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" role="button" data-bs-toggle="collapse" href="#collapseExamSchedule" aria-expanded="false" aria-controls="collapseExamSchedule">
+            <i class="fas fa-stream"></i> Exam Schedule <i class="fas fa-caret-down"></i>
+          </a>
+          <div class="collapse" id="collapseExamSchedule">
+          <ul class="flex-column">
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#collapseDaySchedule" role="button" aria-expanded="false" aria-controls="collapseEveSchedule">
+                 Day Batch <i class="fas fa-caret-down"></i>
+              </a>
+              <ul class="flex-column collapse" id="collapseDaySchedule">
+                <li class="nav-item">
+                  <a class="nav-link" href="day_routine.html">Generate Schedule</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="day_publish_schedule.html">Publish Schedule</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#collapseEveSchedule" role="button" aria-expanded="false" aria-controls="collapseEveSchedule">
+                 Evening Batch <i class="fas fa-caret-down"></i>
+              </a>
+              <ul class="flex-column collapse" id="collapseEveSchedule">
+                <li class="nav-item">
+                  <a class="nav-link" href="eve_routine.html">Generate Schedule</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="eve_publish_schedule.html">Publish Schedule</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="room.html"> <i class="fas fa-stream"></i> Room Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#collapseSettings" role="button" aria-expanded="false"  aria-controls="collapseSettings">
+            <i class="fas fa-cog"></i> Settings <i class="fas fa-caret-down"></i>
+          </a>
+          <ul class="flex-column collapse" id="collapseSettings">
+            <li class="nav-item">
+              <a class="nav-link" href="superuser.html">Super User</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="subuser.html">Sub User</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+     </div>
+   </nav>
+   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+       {% block body %}
+       {% endblock body %}
+   </main>
+   
+  </div>
+</div>
+  <script src="{% static '/js/bootstrap.min.js' %}"></script>
+  <script src="{% static '/js/all.js' %}"></script>
+</body>
+</html>

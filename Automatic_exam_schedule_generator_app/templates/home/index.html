@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/all.css' %}">
+    <link  rel="stylesheet" href="{% static '/css/style.css' %}">
+    <title>Home{% block title %} {% endblock title %}</title>
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand home_header" href="/index.html">
+      <img src="{% static 'images/logo.png' %}" height="35px">
+      Portcity International University
+    </a>
+  </div>
+</nav>
+     {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+     {% endif %}
+<div class="container">
+ <div class="home_content">
+      <div class="home_img">
+         <img src="{% static '/images/p2.jpg' %}" alt="PCIU">
+      </div>
+      <div class="banner py-4">
+        <h4>View Exam Schedule</h4>
+        <hr>
+        <div class="banner_button py-3">
+          <a href="/view_routine_day.html" class="btn btn-outline-primary">Day</a>
+          <a href="/view_routine_eve.html" class="btn btn-outline-primary">Evening</a>
+        </div>
+      </div>
+ </diV>
+</div>
+<div class="blockquote-footer">
+
+</div>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/js/all.js' %}"></script>
+</body>
+</html>
+
+

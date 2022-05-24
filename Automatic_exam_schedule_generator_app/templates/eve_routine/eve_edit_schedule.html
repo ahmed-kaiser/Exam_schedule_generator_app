@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Routinr - Evening{% endblock title %}
+
+{% block body %}
+<div class="eve_batch_info py-4">
+  <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Edit Schedule Record (Evening)</h5>
+       </div>
+       <div class="course_list_button">
+          <a class="btn btn-light" href="/eve_routine.html">
+            <i class="fas fa-undo"></i> Schedule
+          </a>
+        </div> 
+     </div>
+  <hr>
+  <center class="py-5">
+    {% for info in schedule_info %}
+    <form action="/eve_update_schedule_info/{{info.id}}" method="post">
+      {% csrf_token %}
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Date</span>
+        <input type="date" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="exam_date" value="{{info.exam_date|date:"Y-m-d"}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Weekday</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="weekday" value="{{info.weekday}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Time</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="exam_time" value="{{info.exam_time}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Course Code</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="course_code"  value="{{info.course_code}}" required >
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Course Name</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="course_name"  value="{{info.course_name}}" required >
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Dept.</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="dept" value="{{info.dept}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Batch</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="batch"  value="{{info.batch}}" required >
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Section</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="section"  value="{{info.section}}" required >
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Room No.</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="room"  value="{{info.room}}" required >
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Student Number</span>
+        <input type="number" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="st_number"  value="{{info.st_number}}" required >
+      </div>
+      <button class="btn btn-outline-success" style="width: 40%;" type="submit" id="button-addon1">Update</button>
+    </form>
+    {% endfor %}
+  </center>
+</div>
+{% endblock body %}
+

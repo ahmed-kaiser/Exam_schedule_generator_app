@@ -1,0 +1,30 @@
+{% extends 'home/home_base.html' %}
+{% block title %}/Routine - Day{% endblock title %}
+
+{% block body %}
+    <div class="home_button">
+        <a type="button" href="/view_routine_day.html" class="btn btn-light my-2"><i class="far fa-arrow-alt-circle-left"></i> Back</a>
+    </div>
+    <center>
+    <table class="table table-bordered my-4" style="width:90%;">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">Date & Time</th>
+                <th scope="col">Course Code & Title</th>
+                <th scope="col">Program & Batch</th>
+                <th scope="col">Room & Roll</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for n in schedule %}
+            <tr>
+                <td>{{n.exam_date}}-{{n.weekday}}<br>{{n.exam_time}}</td>
+                <td>{{n.course_code}}-{{n.course_name}}</td>
+                <td>{{n.dept}}-{{n.batch}}-{{n.section}}-({{n.total_st}})</td>
+                <td>{{n.room}}-({{n.st_number}})</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </center>
+{% endblock body %}

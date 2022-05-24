@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}/Publish Evening Exam Routine{% endblock title %}
+
+{% block body %}
+
+    <div class="top_button my-3">
+          <div class="course_list_title">
+             <h5>Publish Exam Schedule (Evening)</h5>
+          </div>
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="float:right">
+            <form action="/eve_cancel_publish_schedule" method="post"  onsubmit="return confirm('Are You Sure, You Want To Remove The Published Schedule....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger">
+                <i class="far fa-window-close"></i> Cancel 
+              </button>
+            </form>
+          </div>
+    </div>
+    <hr>
+    <center>
+    <form action="/eve_publish_schedule.html" method="post" class="py-5">
+        {% csrf_token %}
+        <div class="input-group mb-3" style="width:40%">
+            <span class="input-group-text" id="basic-addon1" style="width:20%">Batch</span>
+            <input type="text" name="batch" class="form-control"  value="Evening" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3" style="width:40%">
+            <label class="input-group-text" for="inputGroupSelect01" style="width:20%">Trimister</label>
+            <select class="form-select" id="inputGroupSelect01" name="trimister" required>
+                <option selected>Choose...</option>
+                <option value="Summer">Summer</option>
+                <option value="Spring">Spring</option>
+                <option value="Fall">Fall</option>
+            </select>
+        </div>
+        <div class="input-group mb-3" style="width:40%">
+            <label class="input-group-text" for="inputGroupSelect01" style="width:20%">Term</label>
+            <select class="form-select" id="inputGroupSelect01" name="term" required>
+                <option selected>Choose...</option>
+                <option value="Mid">Mid</option>
+                <option value="Final">Final</option>
+            </select>
+        </div>
+        <div class="input-group mb-3" style="width:40%">
+            <span class="input-group-text" id="basic-addon1" style="width:20%">Date</span>
+            <input type="date" name="date" class="form-control"  aria-describedby="basic-addon1" required>
+        </div>
+        <button type="submit" class="btn btn-outline-primary" style="width:40%">Publish</button>
+    </form>
+    </center>
+{% endblock body %}

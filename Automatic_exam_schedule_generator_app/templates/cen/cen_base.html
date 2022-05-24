@@ -1,0 +1,94 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static '/css/all.css' %}">
+  <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+  <title>CEN/{% block title %}{% endblock title %}</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/admin.html">
+        <img src="{% static 'images/logo.png' %}" height="35px">
+        Portcity International University
+      </a>
+      <form class="d-flex">
+        <a class="btn btn-outline-dark" href="/logout"><i class="fas fa-sign-out-alt"></i> log-out</a>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container-fluid px-0">
+    <div class="row col-12">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2  d-md-block sidebar py-3">
+        <center><h4 class="py-3">Admin Panel</h4></center>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="cen_admin.html"><i class="fas fa-home"></i> Home (CEN)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#collapseDay" role="button" aria-expanded="false"
+              aria-controls="collapseExample">
+              <i class="fas fa-stream"></i> Day Batch <i class="fas fa-caret-down"></i>
+            </a>
+            <ul class="flex-column collapse" id="collapseDay">
+              <li class="nav-item">
+                <a class="nav-link" href="cen_day_trimister.html">Trimister Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cen_day_batch_info.html">Batch Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cen_day_offered_courses.html">Offered Courses</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#collapseEve" role="button" aria-expanded="false"
+              aria-controls="collapseExample">
+              <i class="fas fa-stream"></i> Evening Batch <i class="fas fa-caret-down"></i>
+            </a>
+            <ul class="flex-column collapse" id="collapseEve">
+              <li class="nav-item">
+                <a class="nav-link" href="cen_eve_trimister.html">Trimister Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cen_eve_batch_info.html">Batch Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cen_eve_offered_courses.html">Offered Courses</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% block body %}
+
+        {% endblock body %}
+      </main>
+    </div>
+  </div>
+
+  <script src="{% static '/js/bootstrap.min.js' %}"></script>
+  <script src="{% static '/js/all.js' %}"></script>
+</body>
+
+</html>

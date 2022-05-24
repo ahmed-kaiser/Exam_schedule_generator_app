@@ -1,0 +1,47 @@
+{% extends 'bte/bte_base.html' %}
+
+{% block title %} Edit Batch Info - Day{% endblock title %}
+
+{% block body %}
+<div class="eve_batch_info py-4">
+  <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Edit Record</h5>
+       </div>
+       <div class="course_list_button">
+          <a class="btn btn-light" href="/bte_day_batch_info.html">
+            <i class="fas fa-undo"></i> Batch Info
+          </a>
+        </div> 
+     </div>
+  <hr>
+  <center class="py-5">
+    {% for info in batch_info %}
+    <form action="/bte_day_update_batch_info/{{info.id}}" method="post">
+      {% csrf_token %}
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Batch NO.</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="batch_no" value="{{info.batch_no}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Section</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="section" value="{{info.section}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">No. Of Students</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="st_number" value="{{info.st_number}}" required>
+      </div>
+      <div class="input-group mb-3" style="width: 40%;">
+        <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Trimister</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default" name="trimister"  value="{{info.trimister.trimister}}" required >
+      </div>
+      <button class="btn btn-outline-success" style="width: 40%;" type="submit" id="button-addon1">Update</button>
+    </form>
+    {% endfor %}
+  </center>
+</div>
+{% endblock body %}

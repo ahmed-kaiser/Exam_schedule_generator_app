@@ -1,0 +1,83 @@
+{% extends 'cse/cse_base.html' %}
+{% block title %}Trimister Info - Evening{% endblock title %}
+
+{% block body %}
+<div class="eve_batch_info py-4">
+  <div class="course_list_head">
+    <div class="course_list_title">
+      <h5>Trimister Info (Evening)</h5>
+    </div>
+    <div class="course_list_button">
+      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="fas fa-plus"></i> Add Trimister Info
+      </button>
+    </div>
+  </div>
+  <hr>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">New Record</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/cse_eve_trimister.html" method="post">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Department</span>
+              <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default" name="dept" placeholder="Enter section" value="CSE" required>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default" style="width: 30%;">Trimister</span>
+              <select class="form-select" id="inputGroupSelect01" name="trimister">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div>
+    <table class="table my-5" style="width: 60%; margin: auto;">
+      <thead>
+        <tr style="text-align:center">
+          <th scope="col">Department</th>
+          <th scope="col">Trimister</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in trimister_info %}
+        <tr style="text-align:center">
+          <td>{{t.dept}}</td>
+          <th>{{t.trimister}}</th>
+          <td>
+            <form action="/cse_eve_delete_trimister/{{t.trimister}}" method="post"
+              onsubmit="return confirm('Are You Sure, You Want To Delete The Record Of Trimister-({{t.trimister}})....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock body %}

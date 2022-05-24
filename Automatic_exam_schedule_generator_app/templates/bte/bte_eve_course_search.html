@@ -1,0 +1,51 @@
+{% extends 'bte/bte_base.html' %}
+
+{% block title %}Search Course - Evening{% endblock title %}
+
+{% block body %}
+<div class="course_list py-4">
+    <div class="course_list_head">
+       <div class="course_list_title">
+         <h5>Offered Courses (Evening)</h5>
+       </div>
+       <div class="course_list_button">
+          <a type="button" href="/bte_eve_offered_courses.html" class="btn btn-light" >
+            <i class="fas fa-undo"></i> Offered Course List
+          </a>
+        </div> 
+    </div>
+    <hr>
+    <table class="table my-5" style="width: 80%; margin: auto;">
+      <thead>
+        <tr>
+          <th scope="col">Course Code</th>
+          <th scope="col">Course Name</th>
+          <th scope="col">Trimister</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in course_list %}
+        <tr>
+          <td>{{course.course_code}}</td>
+          <td>{{course.course_name}}</td>
+          <td>{{course.trimister.trimister}}</td>
+          <td>
+            <form action="/bte_eve_get_offered_courses/{{course.id}}" method="post">
+              {% csrf_token %}
+              <button type="submit" method="post" class="btn btn-outline-success" ><i class="fas fa-edit"></i></button>
+            </form>
+          </td>
+          <td>
+            <form action="/bte_eve_course_delete/{{course.id}}" method="post" onsubmit="return confirm('Are You Sure, You Want To Delete The Course {{course.course_code}}  ....!')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock body %}

@@ -1,5 +1,9 @@
 # Exam schedule generator app for PCIU
 
+#### An automatic exam scheduler is a system that allows generating exam schedules automatically. Making an exam schedule is a tough job for educationalists with respect to time and manpower. It is not so easy to make an exam schedule using the spreadsheet, it arises lots of conflict like tracking the allocated room, distribute the student in the proper way, etc. This automatic scheduler provides a user-friendly interface to manage department information like trimester, batch, offered courses, etc. It generates a schedule from the given information and also gives the privilege to make any kind of change if required. So that a meaningful exam schedule can be made without any type of hindrance.
+
+![image](https://user-images.githubusercontent.com/89702890/170096006-eeafdfb6-dd36-47c7-ad6b-67ee7f704487.png)
+
 ## Admin panel
 ![image](https://user-images.githubusercontent.com/89702890/170094474-8b22d25d-f1e4-420f-8971-4e028b9d5fbb.png)
 

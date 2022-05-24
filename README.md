@@ -27,7 +27,7 @@
 
 ![image](https://user-images.githubusercontent.com/89702890/170094811-9c70c4a9-541e-4207-a4a2-cf31b9f5fb72.png)
 
-## Home Page (Students)
+## Interface for general user (Students)
 ![image](https://user-images.githubusercontent.com/89702890/170094895-fb275f6d-2f64-4951-8cbf-867c6df40480.png)
 
 ![image](https://user-images.githubusercontent.com/89702890/170094922-a10b810b-92c0-46b5-8e5a-99f186a74cc7.png)
